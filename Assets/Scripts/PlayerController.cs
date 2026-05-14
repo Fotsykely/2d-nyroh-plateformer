@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     private Vector2 _moveInput;
     private float _coyoteTimer;
     private float _jumpBufferTimer;
+    private bool _jumpQueued;
+    private bool _jumpHeld;
 
     void Awake()
     {
@@ -32,7 +34,7 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
 
         if (_jumpBufferTimer > 0f && _coyoteTimer > 0f)
         {
-            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, data.jumpForce);
+            _jumpQueued = true;
             _jumpBufferTimer = 0f;
             _coyoteTimer = 0f;
         }
@@ -40,14 +42,29 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
 
     void FixedUpdate()
     {
+        if (_jumpQueued)
+        {
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, data.jumpForce);
+            _jumpQueued = false;
+        }
         _rb.linearVelocity = new Vector2(_moveInput.x * data.moveSpeed, _rb.linearVelocity.y);
+
+        if (_rb.linearVelocity.y < 0f)
+            _rb.linearVelocity += Vector2.up * (Physics2D.gravity.y * (data.fallGravityMultiplier - 1f) * Time.fixedDeltaTime);
+
+        if (_rb.linearVelocity.y > 0f && !_jumpHeld)
+            _rb.linearVelocity += Vector2.up * (Physics2D.gravity.y * (data.lowJumpMultiplier - 1f) * Time.fixedDeltaTime);
+
+        if (_rb.linearVelocity.y < -data.maxFallSpeed)
+            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, -data.maxFallSpeed);
     }
 
     public void OnMove(InputAction.CallbackContext ctx) => _moveInput = ctx.ReadValue<Vector2>();
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed) _jumpBufferTimer = data.jumpBufferTime;
+        if (ctx.performed) { _jumpBufferTimer = data.jumpBufferTime; _jumpHeld = true; }
+        if (ctx.canceled) _jumpHeld = false;
     }
 
     // Stubs — implemented by future components (PlayerCombat, etc.)
