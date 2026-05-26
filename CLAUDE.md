@@ -1,6 +1,30 @@
 # Nyroh — Conventions du projet
 
-Projet : platformer 2D Unity. Architecture orientée **ScriptableObjects** pour découpler données et comportement.
+Projet : **Metroidvania 2D** Unity. Architecture orientée **ScriptableObjects** pour découpler données et comportement.
+
+---
+
+## Vision du jeu
+
+Nyroh est un **Metroidvania 2D** — références directes : *Hollow Knight / Silksong* et *9 Sols*.
+
+Caractéristiques cibles :
+- Monde interconnecté, exploration non-linéaire, backtracking avec nouvelles capacités
+- Système de capacités débloquables (double saut, dash, wall jump, parry, etc.)
+- Combat précis : parry/counter, combos, boss fights
+- Checkpoints + save système persistant
+- Map révélée progressivement
+- Ennemis avec IA variée, patterns distincts
+
+Systèmes à construire (ordre suggéré) :
+1. Capacités joueur (`AbilityData` SO + `UnlockSystem`)
+2. Santé / dégâts (`HealthData` SO + `DamageSystem`)
+3. Combat de base (`AttackController` + parry)
+4. Save / Checkpoint (`SaveData` SO + `SaveManager`)
+5. Transition de salles (`SceneTransitionController`)
+6. IA ennemis (`EnemyData` SO + `EnemyController`)
+7. Boss (`BossData` SO + `BossController`)
+8. Map (`MapData` SO + `MapController`)
 
 ---
 
