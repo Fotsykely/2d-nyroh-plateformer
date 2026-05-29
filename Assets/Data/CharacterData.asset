@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CharacterData
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
   moveSpeed: 5
-  jumpForce: 7.5
+  jumpForce: 8
   coyoteTime: 0.15
   jumpBufferTime: 0.1
   fallGravityMultiplier: 3.5
