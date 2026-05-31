@@ -82,7 +82,7 @@ Nyroh est un Metroidvania 2D à combat précis. Le joueur explore un monde inter
 
 | # | User Story | Acceptance Criteria | Fichiers | Statut |
 |---|------------|---------------------|----------|--------|
-| S1-1 | En tant que joueur, j'ai une barre de vie et je meurs quand elle atteint 0 | PV visibles, mort déclenche `OnPlayerDied` | `HealthData.cs`, `HealthController.cs`, `OnPlayerDied.asset` | `[ ]` |
+| S1-1 | En tant que joueur, j'ai une barre de vie et je meurs quand elle atteint 0 | PV visibles, mort déclenche `OnPlayerDied` | `HealthData.cs`, `HealthController.cs`, `OnPlayerDied.asset` | `[~]` |
 | S1-2 | En tant que joueur, je peux attaquer (slash) au sol et en l'air | Animation + hitbox active pendant le slash | `AttackController.cs` | `[ ]` |
 | S1-3 | En tant que joueur, mes attaques infligent des dégâts | Les PV d'une cible baissent au contact de la hitbox | `DamageSystem.cs` | `[ ]` |
 | S1-4 | En tant que joueur, je suis invincible brièvement après avoir pris un coup (iframes) | Pas de dégâts en double pendant la durée iframes | `HealthController.cs` | `[ ]` |
