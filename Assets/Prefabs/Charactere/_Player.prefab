@@ -171,6 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackController
   attacks:
   - {fileID: 11400000, guid: 51c7b6b9feefe4d6fb3ee28073e0f925, type: 2}
+  - {fileID: 11400000, guid: f7602125b15634fcfbd39ec846bb5b10, type: 2}
   hitbox: {fileID: 3018131677059170103}
 --- !u!1 &4626188685973229072
 GameObject:
