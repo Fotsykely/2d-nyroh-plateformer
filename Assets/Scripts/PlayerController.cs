@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerActions
 {
     [SerializeField] private CharacterData data;
+    [SerializeField] private AttackController _attackController;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
@@ -68,7 +69,10 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     }
 
     // Stubs — implemented by future components (PlayerCombat, etc.)
-    public void OnAttack(InputAction.CallbackContext ctx) { }
+    public void OnAttack(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started) _attackController.Attack();
+    }
     public void OnInteract(InputAction.CallbackContext ctx) { }
     public void OnCrouch(InputAction.CallbackContext ctx) { }
     public void OnSprint(InputAction.CallbackContext ctx) { }
