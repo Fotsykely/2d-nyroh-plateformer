@@ -5,6 +5,7 @@ public class AttackController : MonoBehaviour
     [SerializeField] private AttackData[] attacks;
     [SerializeField] private BoxCollider2D boxHitbox;
     [SerializeField] private CircleCollider2D circleHitbox;
+    [SerializeField] private DamageDealer damageDealer;
 
     private bool _isAttacking;
     private float _attackTimer;
@@ -33,6 +34,7 @@ public class AttackController : MonoBehaviour
         if (_isAttacking || data == null) return;
         _isAttacking = true;
 
+        if (damageDealer != null) damageDealer.Damage = data.damage;
         DisableHitboxes();
 
         if (data.shape == HitboxShape.Box)
