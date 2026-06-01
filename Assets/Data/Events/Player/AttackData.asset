@@ -13,3 +13,10 @@ MonoBehaviour:
   m_Name: AttackData
   m_EditorClassIdentifier: Assembly-CSharp::AttackData
   attackDuration: 0.5
+  damage: 10
+  shape: 0
+  hitboxOffset: {x: 0.5, y: 0}
+  hitboxRotation: 0
+  hitboxSize: {x: 1.5, y: 0.8}
+  hitboxRadius: 0.5
+  gizmoColor: {r: 1, g: 0.2, b: 0.2, a: 0.35}
