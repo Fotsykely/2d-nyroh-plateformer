@@ -172,7 +172,9 @@ MonoBehaviour:
   attacks:
   - {fileID: 11400000, guid: 51c7b6b9feefe4d6fb3ee28073e0f925, type: 2}
   - {fileID: 11400000, guid: f7602125b15634fcfbd39ec846bb5b10, type: 2}
-  hitbox: {fileID: 3018131677059170103}
+  boxHitbox: {fileID: 3018131677059170103}
+  circleHitbox: {fileID: 2158721712518915169}
+  damageDealer: {fileID: 8163086337688944546}
 --- !u!1 &4626188685973229072
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,6 +185,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5683677527894800940}
   - component: {fileID: 3018131677059170103}
+  - component: {fileID: 2158721712518915169}
+  - component: {fileID: 8163086337688944546}
   m_Layer: 0
   m_Name: HitBox
   m_TagString: Untagged
@@ -251,6 +255,57 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!58 &2158721712518915169
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626188685973229072}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
+--- !u!114 &8163086337688944546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626188685973229072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cde4f61ca3b34818b248a7d20f151cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &6572844129035397483
 GameObject:
   m_ObjectHideFlags: 0
