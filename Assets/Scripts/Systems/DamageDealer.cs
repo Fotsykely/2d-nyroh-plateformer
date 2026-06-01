@@ -9,7 +9,7 @@ public class DamageDealer : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if ((targetLayers.value & (1 << other.gameObject.layer)) == 0) return;
-        if (other.TryGetComponent<HealthController>(out var health))
+        if (other.TryGetComponent<HealthController>(out var health) && !health.IsInvincible)
             health.TakeDamage(Damage);
     }
 }
