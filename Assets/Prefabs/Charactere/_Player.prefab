@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthController
   data: {fileID: 11400000, guid: f2fc8840df1bb4d3688ffeeee2667e81, type: 2}
   onPlayerDied: {fileID: 11400000, guid: 54cbdc4d7a91e487e854e96a3ad65d21, type: 2}
+  onDamageTaken: {fileID: 0}
 --- !u!114 &6837370668411860235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,7 +353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageDealer
   targetLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!1 &6572844129035397483
 GameObject:
   m_ObjectHideFlags: 0
