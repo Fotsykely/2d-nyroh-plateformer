@@ -91,7 +91,7 @@ Nyroh est un Metroidvania 2D à combat précis. Le joueur explore un monde inter
 
 | # | Asset | Format | Outil | Statut |
 |---|-------|--------|-------|--------|
-| A1-1 | Barre de vie UI (rectangles colorés) | Unity UI (Canvas) | Unity Editor | `[ ]` |
+| A1-1 | Barre de vie UI (5 coeur ou rectangle juste) | Unity UI (Canvas) | Unity Editor | `[ ]` |
 | A1-2 | Hitbox slash visible (Gizmos en editor, invisible en play) | — | Unity Gizmos | `[ ]` |
 | A1-3 | Flash blanc sur le player lors d'un dégât (iframes feedback) | Material swap | Unity Shader Graph / Sprite | `[ ]` |
 

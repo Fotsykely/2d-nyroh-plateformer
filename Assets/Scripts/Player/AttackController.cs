@@ -71,10 +71,13 @@ public class AttackController : MonoBehaviour
             Gizmos.color = data.gizmoColor;
             Color outline = new(data.gizmoColor.r, data.gizmoColor.g, data.gizmoColor.b, 1f);
 
+            float scaleX = transform.lossyScale.x < 0f ? -1f : 1f;
+            Vector3 origin = boxHitbox != null ? boxHitbox.transform.position : transform.position;
+
             if (data.shape == HitboxShape.Box)
             {
-                Quaternion rot = Quaternion.Euler(0f, 0f, data.hitboxRotation);
-                Vector3 center = transform.position + rot * new Vector3(data.hitboxOffset.x, data.hitboxOffset.y);
+                Quaternion rot = Quaternion.Euler(0f, 0f, data.hitboxRotation * scaleX);
+                Vector3 center = origin + rot * new Vector3(data.hitboxOffset.x * scaleX, data.hitboxOffset.y);
                 Vector3 size = new(data.hitboxSize.x, data.hitboxSize.y, 0.01f);
 
                 Matrix4x4 oldMatrix = Gizmos.matrix;
@@ -86,7 +89,7 @@ public class AttackController : MonoBehaviour
             }
             else
             {
-                Vector3 center = transform.position + new Vector3(data.hitboxOffset.x, data.hitboxOffset.y);
+                Vector3 center = origin + new Vector3(data.hitboxOffset.x * scaleX, data.hitboxOffset.y);
                 Gizmos.DrawSphere(center, data.hitboxRadius);
                 Gizmos.color = outline;
                 Gizmos.DrawWireSphere(center, data.hitboxRadius);

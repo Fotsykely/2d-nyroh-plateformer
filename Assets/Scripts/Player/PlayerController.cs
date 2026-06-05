@@ -60,7 +60,12 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, -data.maxFallSpeed);
     }
 
-    public void OnMove(InputAction.CallbackContext ctx) => _moveInput = ctx.ReadValue<Vector2>();
+    public void OnMove(InputAction.CallbackContext ctx)
+    {
+        _moveInput = ctx.ReadValue<Vector2>();
+        if (_moveInput.x != 0f)
+            transform.localScale = new Vector3(Mathf.Sign(_moveInput.x), 1f, 1f);
+    }
 
     public void OnJump(InputAction.CallbackContext ctx)
     {
