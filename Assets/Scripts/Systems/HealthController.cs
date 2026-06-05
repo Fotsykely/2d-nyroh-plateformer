@@ -8,18 +8,16 @@ public class HealthController : MonoBehaviour
     [SerializeField] private GameEvent onPlayerDied;
     [SerializeField] private GameEvent onDamageTaken;
 
-    public int CurrentHealth { get; private set; }
-    public int MaxHealth => data.maxHealth;
     public bool IsInvincible { get; private set; }
 
-    void Start() => CurrentHealth = data.maxHealth;
+    void Start() => data.CurrentHealth = data.maxHealth;
 
     public void TakeDamage(int amount)
     {
         if (IsInvincible) return;
-        CurrentHealth = Mathf.Max(0, CurrentHealth - amount);
+        data.CurrentHealth = Mathf.Max(0, data.CurrentHealth - amount);
         if (onDamageTaken != null) onDamageTaken.Raise();
-        if (CurrentHealth == 0) { Die(); return; }
+        if (data.CurrentHealth == 0) { Die(); return; }
         StartIframes().Forget();
     }
 
