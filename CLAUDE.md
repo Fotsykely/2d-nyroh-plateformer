@@ -120,6 +120,16 @@ _Player (Empty)           ← Rigidbody2D, Collider2D, PlayerController
 
 ---
 
+## Philosophie de travail
+
+Ce projet n'est **pas du vibe coding**. L'objectif est d'apprendre et d'appliquer les pratiques des game devs professionnels :
+- Comprendre **pourquoi** chaque choix d'architecture avant de coder
+- Utiliser l'**Unity Editor** en premier (hiérarchie, Inspector, prefabs) — le code vient en renfort, pas à la place
+- Chaque système est discuté et validé avant d'être implémenté
+- L'IA accompagne et explique, elle ne génère pas du code à la aveugle
+
+---
+
 ## État actuel
 
 - `PlayerController.cs` — mouvement + saut (coyote time, jump buffer, variable fall gravity)
