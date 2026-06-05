@@ -9,6 +9,7 @@ public class HealthController : MonoBehaviour
     [SerializeField] private GameEvent onDamageTaken;
 
     public int CurrentHealth { get; private set; }
+    public int MaxHealth => data.maxHealth;
     public bool IsInvincible { get; private set; }
 
     void Start() => CurrentHealth = data.maxHealth;
@@ -37,9 +38,4 @@ public class HealthController : MonoBehaviour
         enabled = false;
     }
 
-    // TODO: Replace with proper health UI
-    void OnGUI()
-    {
-        GUI.Label(new Rect(10, 10, 200, 30), $"HP : {CurrentHealth} / {data.maxHealth}");
-    }
 }
