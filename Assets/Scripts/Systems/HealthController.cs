@@ -10,7 +10,7 @@ public class HealthController : MonoBehaviour
 
     public bool IsInvincible { get; private set; }
 
-    void Start() => data.CurrentHealth = data.maxHealth;
+    void Awake() => data.CurrentHealth = data.maxHealth;
 
     public void TakeDamage(int amount)
     {

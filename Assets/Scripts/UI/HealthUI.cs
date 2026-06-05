@@ -23,8 +23,8 @@ public class HealthUI : MonoBehaviour
     }
 
     public void Refresh()
-    {
+    {   
         for (int i = 0; i < _lives.Length; i++)
-            _lives[i].color = i < healthData.CurrentHealth ? Color.white : new Color(1f, 1f, 1f, 0.25f);
+            _lives[i].color = i < healthData.CurrentHealth ? Color.white : new Color(0f, 0f, 0f, 0.25f);
     }
 }
