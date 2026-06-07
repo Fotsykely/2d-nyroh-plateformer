@@ -18,12 +18,17 @@ public class AttackDataEditor : Editor
         EditorGUILayout.PropertyField(shapeProp);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("hitboxOffset"));
 
-        bool isBox = shapeProp.enumNames[shapeProp.enumValueIndex] == "Box";
+        bool isBox      = shapeProp.enumNames[shapeProp.enumValueIndex] == "Box";
+        bool isTriangle = shapeProp.enumNames[shapeProp.enumValueIndex] == "Triangle";
 
         if (isBox)
         {
             EditorGUILayout.PropertyField(serializedObject.FindProperty("hitboxSize"));
             EditorGUILayout.PropertyField(serializedObject.FindProperty("hitboxRotation"));
+        }
+        else if (isTriangle)
+        {
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("trianglePoints"));
         }
         else
         {

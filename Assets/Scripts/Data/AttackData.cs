@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum HitboxShape { Box, Circle }
+public enum HitboxShape { Box, Circle, Triangle }
 
 [CreateAssetMenu(fileName = "AttackData", menuName = "Nyroh/AttackData")]
 public class AttackData : ScriptableObject
@@ -17,6 +17,9 @@ public class AttackData : ScriptableObject
 
     [Tooltip("Utilisé uniquement si shape = Circle")]
     public float hitboxRadius = 0.5f;
+
+    [Tooltip("Sommets du triangle (espace local) — uniquement si shape = Triangle")]
+    public Vector2[] trianglePoints = { new(0f, 0.5f), new(-0.5f, -0.5f), new(0.5f, -0.5f) };
 
 #if UNITY_EDITOR
     public Color gizmoColor = new(1f, 0.2f, 0.2f, 0.35f);
