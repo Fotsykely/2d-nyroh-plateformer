@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: SpikeAttackData
   m_EditorClassIdentifier: Assembly-CSharp::AttackData
   attackDuration: 0.3
-  damage: 10
-  shape: 0
-  hitboxOffset: {x: 0.5, y: 0}
+  damage: 5
+  shape: 2
+  hitboxOffset: {x: 0, y: 0.15}
   hitboxRotation: 0
   hitboxSize: {x: 1.5, y: 0.8}
   hitboxRadius: 0.5
