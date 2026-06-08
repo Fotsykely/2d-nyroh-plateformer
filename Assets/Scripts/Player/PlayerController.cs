@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     private float _jumpBufferTimer;
     private bool _jumpQueued;
     private bool _jumpHeld;
+    private bool _grounded;
 
     void Awake()
     {
@@ -29,8 +30,8 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
 
     void Update()
     {
-        bool grounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
-        _coyoteTimer = grounded ? data.coyoteTime : _coyoteTimer - Time.deltaTime;
+        _grounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        _coyoteTimer = _grounded ? data.coyoteTime : _coyoteTimer - Time.deltaTime;
         _jumpBufferTimer -= Time.deltaTime;
 
         if (_jumpBufferTimer > 0f && _coyoteTimer > 0f)
@@ -48,14 +49,32 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, data.jumpForce);
             _jumpQueued = false;
         }
-        _rb.linearVelocity = new Vector2(_moveInput.x * data.moveSpeed, _rb.linearVelocity.y);
 
+        // --- Gravité variable + apex hang ---
+        float gravity = Physics2D.gravity.y;
+        float multiplier;
         if (_rb.linearVelocity.y < 0f)
-            _rb.linearVelocity += Vector2.up * (Physics2D.gravity.y * (data.fallGravityMultiplier - 1f) * Time.fixedDeltaTime);
+            multiplier = data.fallGravityMultiplier;          // chute
+        else if (_rb.linearVelocity.y > 0f && !_jumpHeld)
+            multiplier = data.lowJumpMultiplier;              // jump-cut
+        else
+            multiplier = data.riseGravityMultiplier;          // montée bouton tenu
 
-        if (_rb.linearVelocity.y > 0f && !_jumpHeld)
-            _rb.linearVelocity += Vector2.up * (Physics2D.gravity.y * (data.lowJumpMultiplier - 1f) * Time.fixedDeltaTime);
+        bool nearApex = Mathf.Abs(_rb.linearVelocity.y) < data.apexThreshold;
+        if (nearApex && _jumpHeld) multiplier *= data.apexGravityScale; // flottement au sommet
 
+        _rb.linearVelocity += Vector2.up * (gravity * (multiplier - 1f) * Time.fixedDeltaTime);
+
+        // --- Mouvement horizontal avec accel/décel ---
+        float targetSpeed = _moveInput.x * data.moveSpeed;
+        bool accelerating = Mathf.Abs(targetSpeed) > 0.01f;
+        float rate = accelerating
+            ? (_grounded ? data.groundAccel : data.airAccel)
+            : (_grounded ? data.groundDecel : data.airDecel);
+        float newX = Mathf.MoveTowards(_rb.linearVelocity.x, targetSpeed, rate * Time.fixedDeltaTime);
+        _rb.linearVelocity = new Vector2(newX, _rb.linearVelocity.y);
+
+        // --- Cap vitesse de chute ---
         if (_rb.linearVelocity.y < -data.maxFallSpeed)
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, -data.maxFallSpeed);
     }

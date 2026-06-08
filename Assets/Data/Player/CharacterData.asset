@@ -12,10 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 792c77cfdac08428c80e8a6398e79f98, type: 3}
   m_Name: CharacterData
   m_EditorClassIdentifier: Assembly-CSharp::CharacterData
-  moveSpeed: 5
+  moveSpeed: 6
+  groundAccel: 80
+  groundDecel: 90
+  airAccel: 50
+  airDecel: 30
   jumpForce: 16
-  coyoteTime: 0.15
-  jumpBufferTime: 0.1
-  fallGravityMultiplier: 7
-  lowJumpMultiplier: 2
-  maxFallSpeed: 30
+  coyoteTime: 0.12
+  jumpBufferTime: 0.12
+  riseGravityMultiplier: 3.5
+  fallGravityMultiplier: 4.5
+  lowJumpMultiplier: 6
+  maxFallSpeed: 28
+  apexThreshold: 3
+  apexGravityScale: 0.5
