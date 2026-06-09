@@ -581,4 +581,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageFlashController
   spriteRenderer: {fileID: 7348529792578008268}
   flashMaterial: {fileID: 2100000, guid: 46694183001ed4c3281b76a83c30fe18, type: 2}
-  flashDuration: 0.3
+  data: {fileID: 11400000, guid: f2fc8840df1bb4d3688ffeeee2667e81, type: 2}
+  blinkInterval: 0.2
