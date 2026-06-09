@@ -22,4 +22,8 @@ public class CharacterData : ScriptableObject
     [Header("Apex hang")]
     public float apexThreshold = 3f;      // |vy| sous lequel on est "près du sommet"
     public float apexGravityScale = 0.5f; // gravité allégée au sommet (flottement)
+
+    [Header("Knockback")]
+    public Vector2 knockbackForce = new Vector2(12f, 10f); // x = recul horizontal, y = saut vertical
+    public float hitstunDuration = 0.18f;                  // durée de perte de contrôle horizontal
 }

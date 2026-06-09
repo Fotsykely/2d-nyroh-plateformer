@@ -10,6 +10,10 @@ public class DamageDealer : MonoBehaviour
     {
         if ((targetLayers.value & (1 << other.gameObject.layer)) == 0) return;
         if (other.TryGetComponent<HealthController>(out var health) && !health.IsInvincible)
+        {
             health.TakeDamage(Damage);
+            if (other.TryGetComponent<IKnockbackable>(out var knockable))
+                knockable.ApplyKnockback(transform.position);
+        }
     }
 }

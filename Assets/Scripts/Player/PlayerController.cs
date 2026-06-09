@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerActions
+public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerActions, IKnockbackable
 {
     [SerializeField] private CharacterData data;
     [SerializeField] private AttackController _attackController;
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     private bool _jumpQueued;
     private bool _jumpHeld;
     private bool _grounded;
+    private float _hitstunTimer;
 
     void Awake()
     {
@@ -44,7 +45,9 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
 
     void FixedUpdate()
     {
-        if (_jumpQueued)
+        _hitstunTimer -= Time.fixedDeltaTime;
+
+        if (_hitstunTimer <= 0f && _jumpQueued)
         {
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, data.jumpForce);
             _jumpQueued = false;
@@ -65,14 +68,17 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
 
         _rb.linearVelocity += Vector2.up * (gravity * (multiplier - 1f) * Time.fixedDeltaTime);
 
-        // --- Mouvement horizontal avec accel/décel ---
-        float targetSpeed = _moveInput.x * data.moveSpeed;
-        bool accelerating = Mathf.Abs(targetSpeed) > 0.01f;
-        float rate = accelerating
-            ? (_grounded ? data.groundAccel : data.airAccel)
-            : (_grounded ? data.groundDecel : data.airDecel);
-        float newX = Mathf.MoveTowards(_rb.linearVelocity.x, targetSpeed, rate * Time.fixedDeltaTime);
-        _rb.linearVelocity = new Vector2(newX, _rb.linearVelocity.y);
+        // --- Mouvement horizontal avec accel/décel (suspendu pendant le hitstun) ---
+        if (_hitstunTimer <= 0f)
+        {
+            float targetSpeed = _moveInput.x * data.moveSpeed;
+            bool accelerating = Mathf.Abs(targetSpeed) > 0.01f;
+            float rate = accelerating
+                ? (_grounded ? data.groundAccel : data.airAccel)
+                : (_grounded ? data.groundDecel : data.airDecel);
+            float newX = Mathf.MoveTowards(_rb.linearVelocity.x, targetSpeed, rate * Time.fixedDeltaTime);
+            _rb.linearVelocity = new Vector2(newX, _rb.linearVelocity.y);
+        }
 
         // --- Cap vitesse de chute ---
         if (_rb.linearVelocity.y < -data.maxFallSpeed)
@@ -90,6 +96,13 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     {
         if (ctx.performed) { _jumpBufferTimer = data.jumpBufferTime; _jumpHeld = true; }
         if (ctx.canceled) _jumpHeld = false;
+    }
+
+    public void ApplyKnockback(Vector2 sourcePosition)
+    {
+        float dirX = Mathf.Sign(transform.position.x - sourcePosition.x); // à l'opposé de la source
+        _rb.linearVelocity = new Vector2(dirX * data.knockbackForce.x, data.knockbackForce.y);
+        _hitstunTimer = data.hitstunDuration;
     }
 
     // Stubs — implemented by future components (PlayerCombat, etc.)
