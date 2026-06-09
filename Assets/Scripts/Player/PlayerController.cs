@@ -46,14 +46,24 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     void FixedUpdate()
     {
         _hitstunTimer -= Time.fixedDeltaTime;
+        bool inHitstun = _hitstunTimer > 0f;
 
-        if (_hitstunTimer <= 0f && _jumpQueued)
-        {
-            _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, data.jumpForce);
-            _jumpQueued = false;
-        }
+        if (!inHitstun) TryJump();
+        ApplyGravity();
+        if (!inHitstun) Move();
+        CapFallSpeed();
+    }
 
-        // --- Gravité variable + apex hang ---
+    private void TryJump()
+    {
+        if (!_jumpQueued) return;
+        _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, data.jumpForce);
+        _jumpQueued = false;
+    }
+
+    // Gravité variable + apex hang
+    private void ApplyGravity()
+    {
         float gravity = Physics2D.gravity.y;
         float multiplier;
         if (_rb.linearVelocity.y < 0f)
@@ -67,20 +77,22 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
         if (nearApex && _jumpHeld) multiplier *= data.apexGravityScale; // flottement au sommet
 
         _rb.linearVelocity += Vector2.up * (gravity * (multiplier - 1f) * Time.fixedDeltaTime);
+    }
 
-        // --- Mouvement horizontal avec accel/décel (suspendu pendant le hitstun) ---
-        if (_hitstunTimer <= 0f)
-        {
-            float targetSpeed = _moveInput.x * data.moveSpeed;
-            bool accelerating = Mathf.Abs(targetSpeed) > 0.01f;
-            float rate = accelerating
-                ? (_grounded ? data.groundAccel : data.airAccel)
-                : (_grounded ? data.groundDecel : data.airDecel);
-            float newX = Mathf.MoveTowards(_rb.linearVelocity.x, targetSpeed, rate * Time.fixedDeltaTime);
-            _rb.linearVelocity = new Vector2(newX, _rb.linearVelocity.y);
-        }
+    // Mouvement horizontal avec accel/décel
+    private void Move()
+    {
+        float targetSpeed = _moveInput.x * data.moveSpeed;
+        bool accelerating = Mathf.Abs(targetSpeed) > 0.01f;
+        float rate = accelerating
+            ? (_grounded ? data.groundAccel : data.airAccel)
+            : (_grounded ? data.groundDecel : data.airDecel);
+        float newX = Mathf.MoveTowards(_rb.linearVelocity.x, targetSpeed, rate * Time.fixedDeltaTime);
+        _rb.linearVelocity = new Vector2(newX, _rb.linearVelocity.y);
+    }
 
-        // --- Cap vitesse de chute ---
+    private void CapFallSpeed()
+    {
         if (_rb.linearVelocity.y < -data.maxFallSpeed)
             _rb.linearVelocity = new Vector2(_rb.linearVelocity.x, -data.maxFallSpeed);
     }

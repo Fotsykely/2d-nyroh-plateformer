@@ -7,7 +7,6 @@ public class DamageFlashController : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private Material flashMaterial;
     [SerializeField] private HealthData data;
-    [SerializeField] private float blinkInterval = 0.08f;
 
     private Material _normalMaterial;
 
@@ -24,8 +23,8 @@ public class DamageFlashController : MonoBehaviour
         {
             on = !on;
             spriteRenderer.material = on ? flashMaterial : _normalMaterial;
-            await UniTask.Delay(TimeSpan.FromSeconds(blinkInterval), cancellationToken: token);
-            elapsed += blinkInterval;
+            await UniTask.Delay(TimeSpan.FromSeconds(data.blinkInterval), cancellationToken: token);
+            elapsed += data.blinkInterval;
         }
         spriteRenderer.material = _normalMaterial;
     }
