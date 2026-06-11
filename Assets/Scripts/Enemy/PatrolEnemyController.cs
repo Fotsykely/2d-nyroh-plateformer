@@ -4,6 +4,7 @@ using UnityEngine;
 public class PatrolEnemyController : MonoBehaviour
 {
     [SerializeField] private PatrolEnemyData data;
+    [SerializeField] private AttackData contactAttack;
     [SerializeField] private DamageDealer contactDamageDealer;
     [SerializeField] private Transform edgeCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -17,11 +18,11 @@ public class PatrolEnemyController : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _spawnX = transform.position.x;
 
-        if (data.contactAttack != null)
+        if (contactAttack != null)
         {
-            contactDamageDealer.Damage = data.contactAttack.damage;
-            contactDamageDealer.KnockbackForce = data.contactAttack.knockbackForce;
-            contactDamageDealer.HitstunDuration = data.contactAttack.hitstunDuration;
+            contactDamageDealer.Damage = contactAttack.damage;
+            contactDamageDealer.KnockbackForce = contactAttack.knockbackForce;
+            contactDamageDealer.HitstunDuration = contactAttack.hitstunDuration;
         }
     }
 
