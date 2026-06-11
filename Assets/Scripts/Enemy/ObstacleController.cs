@@ -8,6 +8,8 @@ public class ObstacleController : MonoBehaviour
     void Awake()
     {
         damageDealer.Damage = data.damage;
+        damageDealer.KnockbackForce = data.knockbackForce;
+        damageDealer.HitstunDuration = data.hitstunDuration;
 
         if (data.shape == HitboxShape.Box && TryGetComponent<BoxCollider2D>(out var box))
         {

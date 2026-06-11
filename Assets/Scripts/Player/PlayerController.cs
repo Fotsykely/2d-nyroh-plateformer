@@ -110,11 +110,11 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
         if (ctx.canceled) _jumpHeld = false;
     }
 
-    public void ApplyKnockback(Vector2 sourcePosition)
+    public void ApplyKnockback(Vector2 sourcePosition, Vector2 force, float hitstun)
     {
-        float dirX = Mathf.Sign(transform.position.x - sourcePosition.x); // à l'opposé de la source
-        _rb.linearVelocity = new Vector2(dirX * data.knockbackForce.x, data.knockbackForce.y);
-        _hitstunTimer = data.hitstunDuration;
+        float dirX = Mathf.Sign(transform.position.x - sourcePosition.x);
+        _rb.linearVelocity = new Vector2(dirX * force.x, force.y);
+        _hitstunTimer = hitstun;
     }
 
     // Stubs — implemented by future components (PlayerCombat, etc.)

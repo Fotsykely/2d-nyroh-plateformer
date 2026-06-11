@@ -5,6 +5,8 @@ public class DamageDealer : MonoBehaviour
     [SerializeField] private LayerMask targetLayers;
 
     public int Damage { get; set; }
+    public Vector2 KnockbackForce { get; set; }
+    public float HitstunDuration { get; set; }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -13,7 +15,7 @@ public class DamageDealer : MonoBehaviour
         {
             health.TakeDamage(Damage);
             if (other.TryGetComponent<IKnockbackable>(out var knockable))
-                knockable.ApplyKnockback(transform.position);
+                knockable.ApplyKnockback(transform.position, KnockbackForce, HitstunDuration);
         }
     }
 }

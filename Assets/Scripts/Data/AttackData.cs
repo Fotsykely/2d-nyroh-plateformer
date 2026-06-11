@@ -8,6 +8,10 @@ public class AttackData : ScriptableObject
     public float attackDuration = 0.3f;
     public int damage = 10;
 
+    [Header("Knockback infligé")]
+    public Vector2 knockbackForce = new(8f, 6f);
+    public float hitstunDuration = 0.12f;
+
     public HitboxShape shape = HitboxShape.Box;
     public Vector2 hitboxOffset = new(0.5f, 0f);
     public float hitboxRotation = 0f;

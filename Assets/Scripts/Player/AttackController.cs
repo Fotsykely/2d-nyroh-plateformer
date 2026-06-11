@@ -34,7 +34,12 @@ public class AttackController : MonoBehaviour
         if (_isAttacking || data == null) return;
         _isAttacking = true;
 
-        if (damageDealer != null) damageDealer.Damage = data.damage;
+        if (damageDealer != null)
+        {
+            damageDealer.Damage = data.damage;
+            damageDealer.KnockbackForce = data.knockbackForce;
+            damageDealer.HitstunDuration = data.hitstunDuration;
+        }
         DisableHitboxes();
 
         if (data.shape == HitboxShape.Box)
