@@ -36,6 +36,10 @@ public class AttackDataEditor : Editor
         }
 
         EditorGUILayout.Space();
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("knockbackForce"));
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("hitstunDuration"));
+
+        EditorGUILayout.Space();
         EditorGUILayout.PropertyField(serializedObject.FindProperty("gizmoColor"));
 
         serializedObject.ApplyModifiedProperties();
