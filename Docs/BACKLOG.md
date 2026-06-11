@@ -106,7 +106,7 @@ Nyroh est un Metroidvania 2D à combat précis. Le joueur explore un monde inter
 | # | User Story | Acceptance Criteria | Fichiers | Statut |
 |---|------------|---------------------|----------|--------|
 | S2-1 | En tant que designer, je configure un ennemi via SO | Toutes les stats éditables dans l'Inspector sans toucher au code | `EnemyData.cs` | `[~]` |
-| S2-2 | En tant que joueur, un ennemi patrouille et m'inflige des dégâts au contact | Demi-tour au bord de plateforme ou sur obstacle | `EnemyController.cs` | `[ ]` |
+| S2-2 | En tant que joueur, un ennemi patrouille et m'inflige des dégâts au contact | Demi-tour au bord de plateforme ou sur obstacle | `EnemyController.cs` | `[~]` |
 | S2-3 | En tant que joueur, l'ennemi meurt quand ses PV tombent à 0 | Animation de mort + disparition, `OnEnemyDied` levé | `EnemyController.cs`, `OnEnemyDied.asset` | `[ ]` |
 
 **Art S2 — Placeholder**
