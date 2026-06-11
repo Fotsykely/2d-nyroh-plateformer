@@ -70,7 +70,6 @@ Transform:
   - {fileID: 4803163589082570381}
   - {fileID: 6969935439159803221}
   - {fileID: 5683677527894800940}
-  - {fileID: 7961210331320211404}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &3326896113922822493
@@ -414,7 +413,7 @@ Transform:
   m_LocalScale: {x: 0.4881736, y: 0.4621429, z: 0.2799}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7149944042768338985}
+  m_Father: {fileID: 4803163589082570381}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!212 &281422853356550841
 SpriteRenderer:
@@ -487,7 +486,7 @@ GameObject:
   - component: {fileID: 7348529792578008268}
   - component: {fileID: 1809128686261300873}
   m_Layer: 7
-  m_Name: Visual
+  m_Name: _Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -505,7 +504,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7961210331320211404}
   m_Father: {fileID: 7149944042768338985}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7348529792578008268
@@ -582,4 +582,3 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7348529792578008268}
   flashMaterial: {fileID: 2100000, guid: 46694183001ed4c3281b76a83c30fe18, type: 2}
   data: {fileID: 11400000, guid: f2fc8840df1bb4d3688ffeeee2667e81, type: 2}
-  blinkInterval: 0.2
