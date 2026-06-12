@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PatrolContactAttackData
   m_EditorClassIdentifier: Assembly-CSharp::AttackData
   attackDuration: 0.3
-  damage: 10
-  knockbackForce: {x: 8, y: 6}
+  damage: 1
+  knockbackForce: {x: 12, y: 6}
   hitstunDuration: 0.12
   shape: 0
   hitboxOffset: {x: 0.5, y: 0}

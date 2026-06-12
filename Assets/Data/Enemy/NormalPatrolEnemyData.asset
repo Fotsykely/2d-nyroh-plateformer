@@ -12,8 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daf81395668654540b3f7ae31f2bf6e4, type: 3}
   m_Name: NormalPatrolEnemyData
   m_EditorClassIdentifier: Assembly-CSharp::PatrolEnemyData
-  contactDamage: 1
-  knockbackForce: {x: 8, y: 6}
-  hitstunDuration: 0.15
-  moveSpeed: 2
-  patrolRange: 4
+  moveSpeed: 2.42
+  patrolRange: 15.06

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5715439189616635652}
   - component: {fileID: 694602548042839793}
   - component: {fileID: 1741627848094701712}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: _PatrolEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 5722924638762059933}
   - component: {fileID: 6839780349487619450}
   - component: {fileID: 2908988038513132035}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ContactHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 601787098443721032}
   - component: {fileID: 1142065694414661137}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: _Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8550272193746652416}
   - component: {fileID: 1179652200058792225}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8518899476012325704}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EdgeCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
