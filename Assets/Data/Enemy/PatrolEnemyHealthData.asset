@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fc03149e66fa47cca28879dc4c01801, type: 3}
   m_Name: PatrolEnemyHealthData
   m_EditorClassIdentifier: Assembly-CSharp::HealthData
-  maxHealth: 3
-  iframeDuration: 0.8
-  blinkInterval: 0.2
+  maxHealth: 2
+  iframeDuration: 0.4
+  blinkInterval: 0.1
