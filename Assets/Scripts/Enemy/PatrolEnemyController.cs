@@ -6,6 +6,7 @@ public class PatrolEnemyController : MonoBehaviour
     [SerializeField] private PatrolEnemyData data;
     [SerializeField] private AttackData contactAttack;
     [SerializeField] private DamageDealer contactDamageDealer;
+    [SerializeField] private KnockbackHandler _knockbackHandler;
     [SerializeField] private Transform edgeCheck;
     [SerializeField] private LayerMask groundLayer;
 
@@ -26,7 +27,11 @@ public class PatrolEnemyController : MonoBehaviour
         }
     }
 
-    void FixedUpdate() => Patrol();
+    void FixedUpdate()
+    {
+        if (_knockbackHandler != null && _knockbackHandler.IsInHitstun) return;
+        Patrol();
+    }
 
     private void Patrol()
     {

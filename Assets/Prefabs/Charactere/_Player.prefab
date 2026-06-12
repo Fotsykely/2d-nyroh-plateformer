@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 8200581996874189828}
   - component: {fileID: 7177723143325286082}
   - component: {fileID: 6640983258621854444}
+  - component: {fileID: 4197048225429619890}
   m_Layer: 7
   m_Name: _Player
   m_TagString: Untagged
@@ -113,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   data: {fileID: 11400000, guid: 62d7f046700f14596a14bd6eff17ff30, type: 2}
   _attackController: {fileID: 7177723143325286082}
+  _knockbackHandler: {fileID: 4197048225429619890}
   groundCheck: {fileID: 6969935439159803221}
   groundLayer:
     serializedVersion: 2
@@ -130,8 +132,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthController
   data: {fileID: 11400000, guid: f2fc8840df1bb4d3688ffeeee2667e81, type: 2}
-  onPlayerDied: {fileID: 11400000, guid: 54cbdc4d7a91e487e854e96a3ad65d21, type: 2}
+  onDied: {fileID: 11400000, guid: 54cbdc4d7a91e487e854e96a3ad65d21, type: 2}
   onDamageTaken: {fileID: 11400000, guid: ec9bb76d2c4bb4f1bac0b2f848447165, type: 2}
+  destroyOnDeath: 0
+  deathDelay: 0.3
 --- !u!114 &6837370668411860235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +256,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4197048225429619890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3211740373493388869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1814d587d64184d4891b63672acb0711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KnockbackHandler
 --- !u!1 &4626188685973229072
 GameObject:
   m_ObjectHideFlags: 0

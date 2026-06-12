@@ -2,10 +2,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerActions, IKnockbackable
+public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerActions
 {
     [SerializeField] private CharacterData data;
     [SerializeField] private AttackController _attackController;
+    [SerializeField] private KnockbackHandler _knockbackHandler;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
@@ -17,7 +18,6 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     private bool _jumpQueued;
     private bool _jumpHeld;
     private bool _grounded;
-    private float _hitstunTimer;
 
     void Awake()
     {
@@ -45,8 +45,7 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
 
     void FixedUpdate()
     {
-        _hitstunTimer -= Time.fixedDeltaTime;
-        bool inHitstun = _hitstunTimer > 0f;
+        bool inHitstun = _knockbackHandler != null && _knockbackHandler.IsInHitstun;
 
         if (!inHitstun) TryJump();
         ApplyGravity();
@@ -108,13 +107,6 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     {
         if (ctx.performed) { _jumpBufferTimer = data.jumpBufferTime; _jumpHeld = true; }
         if (ctx.canceled) _jumpHeld = false;
-    }
-
-    public void ApplyKnockback(Vector2 sourcePosition, Vector2 force, float hitstun)
-    {
-        float dirX = Mathf.Sign(transform.position.x - sourcePosition.x);
-        _rb.linearVelocity = new Vector2(dirX * force.x, force.y);
-        _hitstunTimer = hitstun;
     }
 
     // Stubs — implemented by future components (PlayerCombat, etc.)
