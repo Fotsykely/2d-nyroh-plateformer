@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5715439189616635652}
   - component: {fileID: 694602548042839793}
   - component: {fileID: 1741627848094701712}
+  - component: {fileID: 1113962577593325777}
   m_Layer: 6
   m_Name: _PatrolEnemy
   m_TagString: Untagged
@@ -129,6 +130,23 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &1113962577593325777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4542296366578837806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0446a0bc210c14815aa30944259e3383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthController
+  data: {fileID: 11400000, guid: d07b2ec9021204d158b76c52f8a933b8, type: 2}
+  onDied: {fileID: 11400000, guid: beb4fc07fce5a4e348e44f92d050b153, type: 2}
+  onDamageTaken: {fileID: 0}
+  destroyOnDeath: 1
+  deathDelay: 0.3
 --- !u!1 &5306879653158503662
 GameObject:
   m_ObjectHideFlags: 0
