@@ -75,7 +75,8 @@ Assets/Data/Events/       → OnNomDuSystemeXxx.asset
 |------|-----------|---------|
 | SO données | `NomData` | `CharacterData`, `EnemyData` |
 | SO events | `OnNomVerbe` | `OnPlayerDied`, `OnCoinCollected` |
-| Controllers | `NomController` | `PlayerController`, `EnemyController` |
+| Controllers (pilotent) | `NomController` | `PlayerController`, `PatrolEnemyController` |
+| Handlers (réagissent) | `NomHandler` | `KnockbackHandler`, `DamageFlashHandler` |
 | Prefabs root | préfixe `_` | `_Player`, `_World`, `_Systems` |
 | Assets SO données | même nom que la classe | `CharacterData.asset` |
 | Assets SO events | même nom que la classe | `OnPlayerDied.asset` |
