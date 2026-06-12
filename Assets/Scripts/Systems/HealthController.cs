@@ -1,12 +1,15 @@
 using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class HealthController : MonoBehaviour
 {
     [SerializeField] private HealthData data;
-    [SerializeField] private GameEvent onPlayerDied;
+    [FormerlySerializedAs("onPlayerDied")] [SerializeField] private GameEvent onDied;
     [SerializeField] private GameEvent onDamageTaken;
+    [SerializeField] private bool destroyOnDeath;
+    [SerializeField] private float deathDelay = 0.3f;
 
     public bool IsInvincible { get; private set; }
 
@@ -32,8 +35,24 @@ public class HealthController : MonoBehaviour
 
     private void Die()
     {
-        if (onPlayerDied != null) onPlayerDied.Raise();
-        enabled = false;
+        if (onDied != null) onDied.Raise();
+        if (destroyOnDeath)
+        {
+            var rb = GetComponent<Rigidbody2D>();
+            if (rb != null) { rb.linearVelocity = Vector2.zero; rb.simulated = false; }
+            DestroyAfterDelay().Forget();
+        }
+        else
+        {
+            enabled = false;
+        }
     }
 
+    private async UniTaskVoid DestroyAfterDelay()
+    {
+        await UniTask.Delay(
+            TimeSpan.FromSeconds(deathDelay),
+            cancellationToken: this.GetCancellationTokenOnDestroy());
+        Destroy(gameObject);
+    }
 }
