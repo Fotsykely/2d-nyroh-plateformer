@@ -7,8 +7,8 @@ public class PatrolEnemyController : MonoBehaviour
     [SerializeField] private AttackData contactAttack;
     [SerializeField] private DamageDealer contactDamageDealer;
     [SerializeField] private KnockbackHandler _knockbackHandler;
+    [SerializeField] private GroundChecker _groundChecker;
     [SerializeField] private Transform edgeCheck;
-    [SerializeField] private LayerMask groundLayer;
 
     private Rigidbody2D _rb;
     private float _direction = 1f;
@@ -35,7 +35,9 @@ public class PatrolEnemyController : MonoBehaviour
 
     private void Patrol()
     {
-        bool groundAhead = Physics2D.Raycast(edgeCheck.position, Vector2.down, 0.5f, groundLayer);
+        if (!_groundChecker.IsGrounded) return;
+
+        bool groundAhead = Physics2D.Raycast(edgeCheck.position, Vector2.down, 0.5f);
         bool outsideRange = Mathf.Abs(transform.position.x - _spawnX) >= data.patrolRange;
 
         if (!groundAhead || outsideRange)

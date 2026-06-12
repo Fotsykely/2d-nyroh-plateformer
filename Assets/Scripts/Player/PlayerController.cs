@@ -7,8 +7,7 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
     [SerializeField] private CharacterData data;
     [SerializeField] private AttackController _attackController;
     [SerializeField] private KnockbackHandler _knockbackHandler;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private GroundChecker _groundChecker;
 
     private InputSystem_Actions _input;
     private Rigidbody2D _rb;
@@ -31,7 +30,7 @@ public class PlayerController : MonoBehaviour, InputSystem_Actions.IPlayerAction
 
     void Update()
     {
-        _grounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        _grounded = _groundChecker.IsGrounded;
         _coyoteTimer = _grounded ? data.coyoteTime : _coyoteTimer - Time.deltaTime;
         _jumpBufferTimer -= Time.deltaTime;
 

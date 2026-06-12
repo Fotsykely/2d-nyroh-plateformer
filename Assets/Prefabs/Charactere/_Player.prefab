@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6969935439159803221}
+  - component: {fileID: 3908526144394083388}
   m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
@@ -31,6 +32,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7149944042768338985}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3908526144394083388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273278765473888340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc05731d021042f0bbd1bdb876d7077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundChecker
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  radius: 0.22
 --- !u!1 &3211740373493388869
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,10 +132,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 62d7f046700f14596a14bd6eff17ff30, type: 2}
   _attackController: {fileID: 7177723143325286082}
   _knockbackHandler: {fileID: 4197048225429619890}
-  groundCheck: {fileID: 6969935439159803221}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
+  _groundChecker: {fileID: 3908526144394083388}
 --- !u!114 &5962878918029301804
 MonoBehaviour:
   m_ObjectHideFlags: 0
