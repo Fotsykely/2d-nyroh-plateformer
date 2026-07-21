@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "2d-Nyroh-plateformer.slnx",
+    "dotnet.defaultSolution": "2d-nyroh-plateformer.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
