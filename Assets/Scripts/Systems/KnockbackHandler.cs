@@ -10,6 +10,7 @@ public class KnockbackHandler : MonoBehaviour, IKnockbackable
 
     void Awake() => _rb = GetComponent<Rigidbody2D>();
     void FixedUpdate() => _hitstunTimer -= Time.fixedDeltaTime;
+    public void ResetHitstun() => _hitstunTimer = 0f;
 
     public void ApplyKnockback(Vector2 sourcePosition, Vector2 force, float hitstun)
     {

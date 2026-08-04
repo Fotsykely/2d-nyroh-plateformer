@@ -17,11 +17,25 @@ public class HealthController : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        if (IsInvincible) return;
+        if (!enabled || IsInvincible) return;
         data.CurrentHealth = Mathf.Max(0, data.CurrentHealth - amount);
         if (onDamageTaken != null) onDamageTaken.Raise();
         if (data.CurrentHealth == 0) { Die(); return; }
         StartIframes().Forget();
+    }
+
+    public void Revive()
+    {
+        data.CurrentHealth = data.maxHealth;
+        IsInvincible = false;
+        enabled = true;
+    }
+
+    public void Kill()
+    {
+        if (!enabled) return;
+        data.CurrentHealth = 0;
+        Die();
     }
 
     private async UniTaskVoid StartIframes()

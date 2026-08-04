@@ -67,6 +67,8 @@ Assets/Data/              → NomDuSystemeData.asset
 Assets/Data/Events/       → OnNomDuSystemeXxx.asset
 ```
 
+**Répartition du travail** : Claude écrit uniquement les fichiers `.cs`. Les instances `.asset` (SO données/events), les prefabs, et tout câblage de composants/références (Add Component, drag & drop dans l'Inspector) sont créés à la main par l'utilisateur dans l'Unity Editor — jamais par édition directe de YAML. Claude explique quoi créer et où (nom, menu `Create >`, champs à assigner), pas plus.
+
 ---
 
 ## Conventions de nommage
@@ -75,9 +77,11 @@ Assets/Data/Events/       → OnNomDuSystemeXxx.asset
 |------|-----------|---------|
 | SO données | `NomData` | `CharacterData`, `EnemyData` |
 | SO events | `OnNomVerbe` | `OnPlayerDied`, `OnCoinCollected` |
-| Controllers (pilotent) | `NomController` | `PlayerController`, `PatrolEnemyController` |
-| Handlers (réagissent) | `NomHandler` | `KnockbackHandler`, `DamageFlashHandler` |
+| Controllers (pilotent) | `NomController` | `PlayerController`, `PatrolEnemyController`, `RespawnController` |
+| Handlers (réagissent) | `NomHandler` | `KnockbackHandler`, `CheckpointHandler`, `KillZoneHandler` |
 | Checkers (capteurs passifs) | `NomChecker` | `GroundChecker` |
+
+**Controller vs Handler — test concret** : si le script a un `Update`/`FixedUpdate` qui pilote un comportement dans la durée, ou orchestre une séquence à plusieurs étapes (ex. routine async avec délai) → `Controller`. S'il se contente de réagir une seule fois à un trigger/event externe par une action immédiate et autonome (typiquement `OnTriggerEnter2D` → une seule ligne d'effet) → `Handler`. (`DamageDealer` est une exception historique qui précède cette règle — pas la renommer rétroactivement sans besoin.)
 | Prefabs root | préfixe `_` | `_Player`, `_World`, `_Systems` |
 | Assets SO données | même nom que la classe | `CharacterData.asset` |
 | Assets SO events | même nom que la classe | `OnPlayerDied.asset` |
